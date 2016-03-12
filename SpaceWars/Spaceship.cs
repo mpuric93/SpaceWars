@@ -29,5 +29,10 @@ namespace SpaceWars
             this.Bounds.X = (int)Location.X;
             this.Bounds.Y = (int)Location.Y;
         }
+
+        public void Draw(SpriteBatch sb)
+        {
+            sb.Draw(this.image, this.Location);
+        }
     }
 }
