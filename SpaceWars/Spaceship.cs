@@ -22,5 +22,12 @@ namespace SpaceWars
             this.Bounds = new Rectangle(0, 0, 128, 128);
             this.BulletCount = 5;
         }
+
+        public void Update()
+        {
+            this.Location += this.Velocity;
+            this.Bounds.X = (int)Location.X;
+            this.Bounds.Y = (int)Location.Y;
+        }
     }
 }
