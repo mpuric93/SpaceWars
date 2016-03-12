@@ -7,8 +7,12 @@ namespace SpaceWars
    
     public class SpaceCraft : Game
     {
+        const int GAME_HEIGHT = 720;
+        const int GAME_WIDTH = 1280;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        Spaceship spaceship;
 
         public SpaceCraft()
         {
