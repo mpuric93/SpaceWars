@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -47,12 +48,29 @@ namespace SpaceWars
       
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
+            spaceship.Velocity = new Vector2(0, 0);         // if we dont press button anymore
+            KeyHandler();
+            UpdateEntities();
             base.Update(gameTime);
         }
 
+        private void UpdateEntities()
+        {
+            spaceship.Update();
+        }
+
+        private void KeyHandler()
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            {
+                spaceship.Velocity.Y = 10;
+            }
+
+            if(Keyboard.GetState().IsKeyDown(Keys.Up))
+            {
+                spaceship.Velocity.Y = -10;
+            }
+        }
         
         protected override void Draw(GameTime gameTime)
         {
