@@ -28,6 +28,15 @@ namespace SpaceWars
             this.Location += this.Velocity;
             this.Bounds.X = (int)Location.X;
             this.Bounds.Y = (int)Location.Y;
+
+            if (this.Bounds.Top < 0)
+            {
+                this.Location.Y = 0;
+            }
+            if(this.Bounds.Bottom>720)
+            {
+                this.Location.Y = 720 - this.Bounds.Height;
+            }
         }
 
         public void Draw(SpriteBatch sb)
