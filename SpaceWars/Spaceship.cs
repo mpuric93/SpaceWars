@@ -25,7 +25,7 @@ namespace SpaceWars
 
         public void Update(float elapsed)
         {
-            this.Location += this.Velocity;
+            this.Location += this.Velocity * elapsed;
             this.Bounds.X = (int)Location.X;
             this.Bounds.Y = (int)Location.Y;
 

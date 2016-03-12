@@ -19,15 +19,20 @@ namespace SpaceWars
         {
             this.Location = location;
             this.image = image;
-            this.Bounds = new Rectangle(0, 0, 128, 128);
+            this.Bounds = new Rectangle(0, 0, 1920, 1080);
             
         }
 
         public void Update(float elapsed)
         {
-            this.Location += this.Velocity;
+            this.Location += this.Velocity * elapsed;
             this.Bounds.X = (int)Location.X;
             this.Bounds.Y = (int)Location.Y;
+
+            if(this.Bounds.Right <0)
+            {
+                this.Location.X = 1920;
+            }
         }
 
         public void Draw(SpriteBatch sb)

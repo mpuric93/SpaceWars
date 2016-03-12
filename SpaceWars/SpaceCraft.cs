@@ -14,7 +14,8 @@ namespace SpaceWars
         SpriteBatch spriteBatch;
 
         Spaceship spaceship;
-        Background background;
+        Background background1;
+        Background background2;
 
         public SpaceCraft()
         {
@@ -37,7 +38,9 @@ namespace SpaceWars
         {           
             spriteBatch = new SpriteBatch(GraphicsDevice);
             spaceship = new Spaceship(new Vector2(20, GAME_HEIGHT / 2), Content.Load<Texture2D>("ship"));
-            background = new Background(new Vector2(0, 0), Content.Load<Texture2D>("space"));
+            background1 = new Background(new Vector2(0, -90), Content.Load<Texture2D>("space"));
+            background2 = new Background(new Vector2(1920, -90), Content.Load<Texture2D>("spaceRev"));
+
         }
 
        
@@ -51,6 +54,8 @@ namespace SpaceWars
         {
             float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
             spaceship.Velocity = new Vector2(0, 0);         // if we dont press button anymore
+            background1.Velocity = new Vector2(-50, 0);
+            background2.Velocity = new Vector2(-50, 0);
             KeyHandler();
             UpdateEntities(elapsed);
             base.Update(gameTime);
@@ -59,19 +64,20 @@ namespace SpaceWars
         private void UpdateEntities(float elapsed)
         {
             spaceship.Update(elapsed);
-            background.Update(elapsed);
+            background1.Update(elapsed);
+            background2.Update(elapsed);
         }
 
         private void KeyHandler()
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Down))
             {
-                spaceship.Velocity.Y = 10;
+                spaceship.Velocity.Y = 500;
             }
 
             if(Keyboard.GetState().IsKeyDown(Keys.Up))
             {
-                spaceship.Velocity.Y = -10;
+                spaceship.Velocity.Y = -500;
             }
         }
         
@@ -80,7 +86,8 @@ namespace SpaceWars
             GraphicsDevice.Clear(Color.Black);
             base.Draw(gameTime);
             spriteBatch.Begin();
-            background.Draw(spriteBatch);
+            background1.Draw(spriteBatch);
+            background2.Draw(spriteBatch);
             spaceship.Draw(spriteBatch);
             spriteBatch.End();
         }
