@@ -18,6 +18,9 @@ namespace SpaceWars
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            graphics.PreferredBackBufferHeight = GAME_HEIGHT;
+            graphics.PreferredBackBufferWidth = GAME_WIDTH;
         }
 
        
@@ -29,9 +32,10 @@ namespace SpaceWars
 
        
         protected override void LoadContent()
-        {
-           
+        {           
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            spaceship = new Spaceship(new Vector2(20, GAME_HEIGHT / 2), Content.Load<Texture2D>("ship"));
+           // spaceship = new Spaceship(new Vector2(20, GAME_WIDTH / 2)), Content.Load<Texture2D>("ship");
         }
 
        
@@ -55,6 +59,7 @@ namespace SpaceWars
             GraphicsDevice.Clear(Color.Black);
             base.Draw(gameTime);
             spriteBatch.Begin();
+            spaceship.Draw(spriteBatch);
             spriteBatch.End();
         }
     }
