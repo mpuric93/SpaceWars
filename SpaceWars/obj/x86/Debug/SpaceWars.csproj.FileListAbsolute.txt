@@ -24,3 +24,4 @@ C:\Users\Mihailo\Documents\SpaceWars\SpaceWars\bin\Windows\Debug\SharpDX.Direct3
 C:\Users\Mihailo\Documents\SpaceWars\SpaceWars\obj\x86\Debug\SpaceWars.csprojResolveAssemblyReference.cache
 C:\Users\Mihailo\Documents\SpaceWars\SpaceWars\obj\x86\Debug\SpaceWars.exe
 C:\Users\Mihailo\Documents\SpaceWars\SpaceWars\obj\x86\Debug\SpaceWars.pdb
+C:\Users\Mihailo\Documents\SpaceWars\SpaceWars\bin\Windows\Debug\Content\space.xnb

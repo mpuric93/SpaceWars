@@ -14,6 +14,7 @@ namespace SpaceWars
         SpriteBatch spriteBatch;
 
         Spaceship spaceship;
+        Background background;
 
         public SpaceCraft()
         {
@@ -36,7 +37,7 @@ namespace SpaceWars
         {           
             spriteBatch = new SpriteBatch(GraphicsDevice);
             spaceship = new Spaceship(new Vector2(20, GAME_HEIGHT / 2), Content.Load<Texture2D>("ship"));
-           // spaceship = new Spaceship(new Vector2(20, GAME_WIDTH / 2)), Content.Load<Texture2D>("ship");
+            background = new Background(new Vector2(0, 0), Content.Load<Texture2D>("space"));
         }
 
        
@@ -58,6 +59,7 @@ namespace SpaceWars
         private void UpdateEntities(float elapsed)
         {
             spaceship.Update(elapsed);
+            background.Update(elapsed);
         }
 
         private void KeyHandler()
@@ -78,6 +80,7 @@ namespace SpaceWars
             GraphicsDevice.Clear(Color.Black);
             base.Draw(gameTime);
             spriteBatch.Begin();
+            background.Draw(spriteBatch);
             spaceship.Draw(spriteBatch);
             spriteBatch.End();
         }
