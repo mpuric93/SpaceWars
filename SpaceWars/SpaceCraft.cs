@@ -48,15 +48,16 @@ namespace SpaceWars
       
         protected override void Update(GameTime gameTime)
         {
+            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
             spaceship.Velocity = new Vector2(0, 0);         // if we dont press button anymore
             KeyHandler();
-            UpdateEntities();
+            UpdateEntities(elapsed);
             base.Update(gameTime);
         }
 
-        private void UpdateEntities()
+        private void UpdateEntities(float elapsed)
         {
-            spaceship.Update();
+            spaceship.Update(elapsed);
         }
 
         private void KeyHandler()

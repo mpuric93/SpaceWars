@@ -23,7 +23,7 @@ namespace SpaceWars
             this.BulletCount = 5;
         }
 
-        public void Update()
+        public void Update(float elapsed)
         {
             this.Location += this.Velocity;
             this.Bounds.X = (int)Location.X;
