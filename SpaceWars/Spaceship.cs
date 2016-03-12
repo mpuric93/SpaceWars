@@ -14,5 +14,13 @@ namespace SpaceWars
         private Texture2D image;
         public Rectangle Bounds;
         public int BulletCount;
+
+        public Spaceship(Vector2 location, Texture2D image)
+        {
+            this.Location = location;
+            this.image = image;
+            this.Bounds = new Rectangle(0, 0, 128, 128);
+            this.BulletCount = 5;
+        }
     }
 }
