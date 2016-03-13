@@ -77,9 +77,56 @@ namespace SpaceWars
             background1.Velocity = new Vector2(-50, 0);
             background2.Velocity = new Vector2(-50, 0);
             GameOverCollision();
+            CheckMeteorBulletCollision();
+            RemoveNotVisible();
             KeyHandler();
             UpdateEntities(elapsed);
             base.Update(gameTime);
+        }
+
+        private void RemoveNotVisible()
+        {
+            for (int i = 0; i < meteors.Count; i++)
+            {
+                var currentWall = meteors[i];
+                for (int j = 0; j < currentWall.Count; j++)
+                {
+                    if (!currentWall[j].IsVisible)
+                    {
+                        currentWall.RemoveAt(j);
+                    }
+                }
+            }
+
+            for (int i = 0; i < bullets.Count; i++)
+            {
+                if (!bullets[i].IsVisible)
+                {
+                    bullets.RemoveAt(i);
+                }
+            }
+        }
+
+        private void CheckMeteorBulletCollision()
+        {
+            foreach (var wall in meteors)
+            {
+                foreach (var meteor in wall)
+                {
+                    foreach (var bullet in bullets)
+                    {
+                        if (meteor.Bounds.Intersects(bullet.Bounds))
+                        {
+                            meteor.IsVisible = false;
+                            bullet.IsVisible = false;
+                            foreach (var meteorToDestroy in wall)
+                            {
+                                meteorToDestroy.IsVisible = false;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void GameOverCollision()

@@ -39,7 +39,11 @@ namespace SpaceWars
 
         public void Draw(SpriteBatch sb)
         {
-            sb.Draw(this.image, this.Location);
+            if (this.IsVisible)
+            {
+                sb.Draw(this.image, this.Location);
+            }
+            
         }
     }
 }
