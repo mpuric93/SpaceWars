@@ -22,6 +22,7 @@ namespace SpaceWars
         int meteorVelocity;
         int holeLength;
         Random rng;
+       
 
         public SpaceCraft()
         {
@@ -43,6 +44,7 @@ namespace SpaceWars
             meteorVelocity = 250;
             holeLength = 8;
             base.Initialize();
+            
         }
 
       
@@ -77,14 +79,23 @@ namespace SpaceWars
 
         private void GameOverCollision()
         {
+         
             foreach (var wall in meteors)
             {
                 foreach (var meteor in wall)
                 {
                     if (meteor.Bounds.Intersects(spaceship.Bounds))
                     {
-                        Exit();
 
+                        try
+                        {
+                           Exit();
+                        }
+                        catch (Exception e)
+                        {
+
+                            Console.WriteLine(e);
+                        }
                     }
                 }
             }
