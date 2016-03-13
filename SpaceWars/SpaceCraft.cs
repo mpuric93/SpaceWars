@@ -96,9 +96,51 @@ namespace SpaceWars
             CheckMeteorBulletCollision();
             ChechPowerupCollision();
             RemoveNotVisible();
+            SetDifficulity();
             KeyHandler();
             UpdateEntities(elapsed);
             base.Update(gameTime);
+        }
+
+        private void SetDifficulity()
+        {
+            if (score>=1500 && difficulty == "Easy")
+            {
+                difficulty = "Medium";
+                meteorVelocity = 300;
+                ChangeMeteorSpeed();
+                ChangePoweupSpeed();
+                holeLength -= 2;
+            }
+
+            if (score>=3000 && difficulty=="Medium")
+            {
+                difficulty = "Hard";
+                meteorVelocity = 350;
+                ChangeMeteorSpeed();
+                ChangePoweupSpeed();
+                holeLength -= 2;
+
+            }
+        }
+
+        private void ChangePoweupSpeed()
+        {
+            foreach (var powerup in powerups)
+            {
+                powerup.Velocity = new Vector2(-meteorVelocity,0);
+            }
+        }
+
+        private void ChangeMeteorSpeed()
+        {
+            foreach (var wall in meteors)
+            {
+                foreach (var meteor in wall)
+                {
+                    meteor.Velocity = new Vector2(-meteorVelocity,0);
+                }
+            } 
         }
 
         private void ChechPowerupCollision()
@@ -153,7 +195,7 @@ namespace SpaceWars
                     {
                         if (meteor.Bounds.Intersects(bullet.Bounds))
                         {
-                            meteor.IsVisible = false;
+                            score -= 100;
                             bullet.IsVisible = false;
                             foreach (var meteorToDestroy in wall)
                             {
@@ -196,6 +238,7 @@ namespace SpaceWars
             spaceship.Update(elapsed);
             background1.Update(elapsed);
             background2.Update(elapsed);
+            score++;
             foreach (var wall in meteors)
             {
                 foreach (var meteor in wall)
@@ -313,6 +356,7 @@ namespace SpaceWars
             spriteBatch.DrawString(basicFont, "Bullets: " + spaceship.BulletCount, new Vector2(0, 0), Color.Red);
             spriteBatch.DrawString(basicFont, "Score " + score, new Vector2(0, 20), Color.Orange);
             spriteBatch.DrawString(basicFont, "Difficulty: " + difficulty, new Vector2(0, 40), Color.Orange);
+            spriteBatch.DrawString(basicFont, "Developed by Mihailo Puric", new Vector2(1080, 0), Color.Orange);
             spriteBatch.End();
 
             base.Draw(gameTime);
