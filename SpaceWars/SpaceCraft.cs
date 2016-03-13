@@ -87,10 +87,23 @@ namespace SpaceWars
             background2.Velocity = new Vector2(-50, 0);
             GameOverCollision();
             CheckMeteorBulletCollision();
+            ChechPowerupCollision();
             RemoveNotVisible();
             KeyHandler();
             UpdateEntities(elapsed);
             base.Update(gameTime);
+        }
+
+        private void ChechPowerupCollision()
+        {
+            foreach (var powerup in powerups)
+            {
+                if (powerup.Bounds.Intersects(spaceship.Bounds))
+                {
+                    powerup.IsVisible = false;
+                    spaceship.BulletCount++;
+                }
+            }
         }
 
         private void RemoveNotVisible()
@@ -112,6 +125,13 @@ namespace SpaceWars
                 if (!bullets[i].IsVisible)
                 {
                     bullets.RemoveAt(i);
+                }
+            }
+            for (int i = 0; i < powerups.Count; i++)
+            {
+                if(!powerups[i].IsVisible)
+                {
+                    powerups.RemoveAt(i);
                 }
             }
         }
@@ -250,7 +270,7 @@ namespace SpaceWars
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && prevState.IsKeyUp(Keys.Space)&& spaceship.BulletCount>0)
             {
                 spaceship.BulletCount--;
-                bullets.Add(new Bullet(new Vector2(spaceship.Location.X, spaceship.Location.Y + 15), Content.Load<Texture2D>("rocket")));
+                bullets.Add(new Bullet(new Vector2(spaceship.Location.X, spaceship.Location.Y), Content.Load<Texture2D>("rocket")));
                 
             }
             prevState = Keyboard.GetState();

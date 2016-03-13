@@ -21,7 +21,7 @@ namespace SpaceWars
             this.image = image;
             this.IsVisible = true;
             this.Bounds = new Rectangle(0,0,40,30);
-            this.Velocity = new Vector2(500, 0);
+            this.Velocity = new Vector2(200, 0);
 
         }
 
