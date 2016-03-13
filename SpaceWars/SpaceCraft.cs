@@ -22,11 +22,16 @@ namespace SpaceWars
         int meteorVelocity;
         int holeLength;
         Random rng;
+        
 
         List<Bullet> bullets;
         KeyboardState prevState;
 
         List<Powerup> powerups;
+
+        SpriteFont basicFont;
+        int score;
+        string difficulty;
 
 
        
@@ -57,6 +62,8 @@ namespace SpaceWars
             meteorVelocity = 200;
             holeLength = 8;
             prevState = Keyboard.GetState();
+            score = 0;
+            difficulty = "Easy";
             base.Initialize();
             
         }
@@ -69,7 +76,7 @@ namespace SpaceWars
             spaceship = new Spaceship(new Vector2(20, GAME_HEIGHT / 2), Content.Load<Texture2D>("ship"));
             background1 = new Background(new Vector2(0, -90), Content.Load<Texture2D>("space"));
             background2 = new Background(new Vector2(1920, -90), Content.Load<Texture2D>("spaceRev"));
-
+            basicFont = Content.Load<SpriteFont>("font");
         }
 
        
@@ -160,27 +167,29 @@ namespace SpaceWars
 
         private void GameOverCollision()
         {
-         
-            foreach (var wall in meteors)
-            {
-                foreach (var meteor in wall)
-                {
-                    if (meteor.Bounds.Intersects(spaceship.Bounds))
+            
+                foreach (var wall in meteors)
+                    foreach (var meteor in wall)
                     {
-
+                        if (meteor.Bounds.Intersects(spaceship.Bounds))
+                        {
                         try
                         {
-                           Exit();
+                            Exit();
                         }
-                        catch (Exception e)
+                        catch (Exception x)
                         {
 
-                            Console.WriteLine(e);
+                            Console.WriteLine(x);
+                        }
+                                  
+                        
                         }
                     }
-                }
             }
-        }
+           
+            
+        
 
         private void UpdateEntities(float elapsed)
         {
@@ -300,6 +309,10 @@ namespace SpaceWars
             {
                 powerup.Draw(spriteBatch);
             }
+
+            spriteBatch.DrawString(basicFont, "Bullets: " + spaceship.BulletCount, new Vector2(0, 0), Color.Red);
+            spriteBatch.DrawString(basicFont, "Score " + score, new Vector2(0, 20), Color.Orange);
+            spriteBatch.DrawString(basicFont, "Difficulty: " + difficulty, new Vector2(0, 40), Color.Orange);
             spriteBatch.End();
 
             base.Draw(gameTime);
