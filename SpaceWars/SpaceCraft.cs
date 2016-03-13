@@ -110,7 +110,16 @@ namespace SpaceWars
             {
                 foreach (var meteor in wall)
                 {
-                    meteor.Update(elapsed);
+                    try
+                    {
+                        meteor.Update(elapsed);
+                    }
+                    catch (Exception e)
+                    {
+
+                        Console.WriteLine(e);
+                    }
+                   
                 }
             }
         }
