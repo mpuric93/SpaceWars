@@ -19,7 +19,7 @@ namespace SpaceWars
         {
             this.Location = location;
             this.image = image;
-            this.Bounds = new Rectangle(0, 0, 128, 128);
+            this.Bounds = new Rectangle(0, 0, 68, 42);
             this.BulletCount = 5;
         }
 

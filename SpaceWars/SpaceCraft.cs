@@ -14,11 +14,9 @@ namespace SpaceWars
         const int GAME_WIDTH = 1280;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
         Spaceship spaceship;
         Background background1;
         Background background2;
-
         List<List<Meteor>> meteors;
         Timer gameTimer;
         int meteorVelocity;
@@ -59,10 +57,10 @@ namespace SpaceWars
         }
 
        
-        protected override void UnloadContent()
+     /*   protected override void UnloadContent()
         {
             
-        }
+        }*/
 
       
         protected override void Update(GameTime gameTime)
@@ -71,9 +69,25 @@ namespace SpaceWars
             spaceship.Velocity = new Vector2(0, 0);         // if we dont press button anymore
             background1.Velocity = new Vector2(-50, 0);
             background2.Velocity = new Vector2(-50, 0);
+            GameOverCollision();
             KeyHandler();
             UpdateEntities(elapsed);
             base.Update(gameTime);
+        }
+
+        private void GameOverCollision()
+        {
+            foreach (var wall in meteors)
+            {
+                foreach (var meteor in wall)
+                {
+                    if (meteor.Bounds.Intersects(spaceship.Bounds))
+                    {
+                        Exit();
+
+                    }
+                }
+            }
         }
 
         private void UpdateEntities(float elapsed)
