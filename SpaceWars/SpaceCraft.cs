@@ -25,6 +25,10 @@ namespace SpaceWars
 
         List<Bullet> bullets;
         KeyboardState prevState;
+
+        List<Powerup> powerups;
+
+
        
 
         public SpaceCraft()
@@ -41,18 +45,23 @@ namespace SpaceWars
         {
             meteors = new List<List<Meteor>>();
             bullets = new List<Bullet>();
+            powerups = new List<Powerup>();
             rng = new Random();
             gameTimer = new Timer(1500);
-            gameTimer.Elapsed += delegate { SpawnMeteorWall(); };
+            gameTimer.Elapsed += delegate
+            {
+                SpawnMeteorWall();
+                SpawnPowerups();
+            };
             gameTimer.Enabled = true;
-            meteorVelocity = 250;
+            meteorVelocity = 200;
             holeLength = 8;
             prevState = Keyboard.GetState();
             base.Initialize();
             
         }
 
-      
+       
 
         protected override void LoadContent()
         {           
@@ -178,6 +187,12 @@ namespace SpaceWars
                 {
                     bullet.Update(elapsed);
                 }
+
+                
+            }
+            foreach (var powerup in powerups)
+            {
+                powerup.Update(elapsed);
             }
         }
 
@@ -189,11 +204,31 @@ namespace SpaceWars
             {
                 if(i<=holePosition || i>= holePosition+holeLength)
                 {
-                    currentWall.Add(new Meteor(new Vector2(GAME_WIDTH, i * 28 + 10), Content.Load<Texture2D>("meteor"), meteorVelocity));
+                    try
+                    {
+                        currentWall.Add(new Meteor(new Vector2(GAME_WIDTH, i * 28 + 10), Content.Load<Texture2D>("meteor"), meteorVelocity));
+
+                    }
+                    catch (Exception e)
+                    {
+
+                        Console.WriteLine(e);
+                    }
                 }
                 }
             meteors.Add(currentWall);
 
+        }
+
+        private void SpawnPowerups()
+        {
+            
+            if (rng.Next(0,3)==0)
+            {
+                powerups.Add(new Powerup(new Vector2(rng.Next(1720, 2000), rng.Next(0, GAME_HEIGHT)),
+               Content.Load<Texture2D>("target"), meteorVelocity));
+            }
+           
         }
 
         private void KeyHandler()
@@ -239,6 +274,11 @@ namespace SpaceWars
             foreach (var bullet in bullets)
             {
                 bullet.Draw(spriteBatch);
+            }
+
+            foreach (var powerup in powerups)
+            {
+                powerup.Draw(spriteBatch);
             }
             spriteBatch.End();
 

@@ -28,3 +28,5 @@ C:\Users\Mihailo\Documents\SpaceWars\SpaceWars\bin\Windows\Debug\Content\spaceRe
 C:\Users\Mihailo\Documents\SpaceWars\SpaceWars\bin\Windows\Debug\Content\meteor.xnb
 C:\Users\Mihailo\Documents\SpaceWars\SpaceWars\obj\x86\Debug\SpaceWars.csprojResolveAssemblyReference.cache
 C:\Users\Mihailo\Documents\SpaceWars\SpaceWars\bin\Windows\Debug\Content\rocket.xnb
+C:\Users\Mihailo\Documents\SpaceWars\SpaceWars\bin\Windows\Debug\Content\Font.xnb
+C:\Users\Mihailo\Documents\SpaceWars\SpaceWars\bin\Windows\Debug\Content\target.xnb

@@ -41,6 +41,7 @@
     <Compile Include="Background.cs" />
     <Compile Include="Bullet.cs" />
     <Compile Include="Meteor.cs" />
+    <Compile Include="Powerup.cs" />
     <Compile Include="SpaceCraft.cs" />
     <Compile Include="EntryPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
