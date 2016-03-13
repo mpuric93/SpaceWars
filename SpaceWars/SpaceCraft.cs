@@ -22,6 +22,9 @@ namespace SpaceWars
         int meteorVelocity;
         int holeLength;
         Random rng;
+
+        List<Bullet> bullets;
+        KeyboardState prevState;
        
 
         public SpaceCraft()
@@ -37,12 +40,14 @@ namespace SpaceWars
         protected override void Initialize()
         {
             meteors = new List<List<Meteor>>();
+            bullets = new List<Bullet>();
             rng = new Random();
             gameTimer = new Timer(1500);
             gameTimer.Elapsed += delegate { SpawnMeteorWall(); };
             gameTimer.Enabled = true;
             meteorVelocity = 250;
             holeLength = 8;
+            prevState = Keyboard.GetState();
             base.Initialize();
             
         }
@@ -121,6 +126,11 @@ namespace SpaceWars
                     }
                    
                 }
+
+                foreach (var bullet in bullets)
+                {
+                    bullet.Update(elapsed);
+                }
             }
         }
 
@@ -154,6 +164,14 @@ namespace SpaceWars
                 background1.Velocity.Y = 20;
                 background2.Velocity.Y = 20;
             }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && prevState.IsKeyUp(Keys.Space)&& spaceship.BulletCount>0)
+            {
+                spaceship.BulletCount--;
+                bullets.Add(new Bullet(new Vector2(spaceship.Location.X, spaceship.Location.Y + 15), Content.Load<Texture2D>("rocket")));
+                
+            }
+            prevState = Keyboard.GetState();
         }
         
         protected override void Draw(GameTime gameTime)
@@ -170,6 +188,10 @@ namespace SpaceWars
                 {
                     meteor.Draw(spriteBatch);
                 }
+            }
+            foreach (var bullet in bullets)
+            {
+                bullet.Draw(spriteBatch);
             }
             spriteBatch.End();
 

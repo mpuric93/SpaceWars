@@ -26,3 +26,5 @@ C:\Users\Mihailo\Documents\SpaceWars\SpaceWars\obj\x86\Debug\SpaceWars.pdb
 C:\Users\Mihailo\Documents\SpaceWars\SpaceWars\bin\Windows\Debug\Content\space.xnb
 C:\Users\Mihailo\Documents\SpaceWars\SpaceWars\bin\Windows\Debug\Content\spaceRev.xnb
 C:\Users\Mihailo\Documents\SpaceWars\SpaceWars\bin\Windows\Debug\Content\meteor.xnb
+C:\Users\Mihailo\Documents\SpaceWars\SpaceWars\obj\x86\Debug\SpaceWars.csprojResolveAssemblyReference.cache
+C:\Users\Mihailo\Documents\SpaceWars\SpaceWars\bin\Windows\Debug\Content\rocket.xnb
