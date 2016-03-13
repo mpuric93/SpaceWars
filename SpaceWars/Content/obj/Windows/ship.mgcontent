@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>C:/Users/Mihailo/Documents/SpaceWars/SpaceWars/Content/ship.png</SourceFile>
-  <SourceTime>2016-03-12T21:07:45.6502822+01:00</SourceTime>
+  <SourceTime>2016-03-13T00:32:06.0429454+01:00</SourceTime>
   <DestFile>C:/Users/Mihailo/Documents/SpaceWars/SpaceWars/Content/bin/Windows/ship.xnb</DestFile>
-  <DestTime>2016-03-12T23:01:07.8984659+01:00</DestTime>
+  <DestTime>2016-03-13T01:50:21.6498101+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2015-04-29T19:14:44+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

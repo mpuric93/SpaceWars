@@ -7,20 +7,22 @@ using System.Text;
 
 namespace SpaceWars
 {
-    public class Background
+   public class Meteor
     {
         public Vector2 Location;
         public Vector2 Velocity;
         private Texture2D image;
         public Rectangle Bounds;
-      
+        public bool IsVisible;
 
-        public Background(Vector2 location, Texture2D image)
+        public Meteor(Vector2 location, Texture2D image, int velocity)
         {
             this.Location = location;
             this.image = image;
-            this.Bounds = new Rectangle(0, 0, 1920, 1080);
-            
+            this.IsVisible = true;
+            this.Bounds = new Rectangle(0, 0, 29, 29);
+            this.Velocity = new Vector2(-velocity, 0);
+
         }
 
         public void Update(float elapsed)
@@ -29,9 +31,9 @@ namespace SpaceWars
             this.Bounds.X = (int)Location.X;
             this.Bounds.Y = (int)Location.Y;
 
-            if(this.Bounds.Right <0)
+            if (this.Location.X < -20)
             {
-                this.Location.X = 1920;
+                this.IsVisible = false;
             }
         }
 

@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
+using System.Timers;
 
 namespace SpaceWars
 {
@@ -17,6 +19,12 @@ namespace SpaceWars
         Background background1;
         Background background2;
 
+        List<List<Meteor>> meteors;
+        Timer gameTimer;
+        int meteorVelocity;
+        int holeLength;
+        Random rng;
+
         public SpaceCraft()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -29,11 +37,18 @@ namespace SpaceWars
        
         protected override void Initialize()
         {
-           
+            meteors = new List<List<Meteor>>();
+            rng = new Random();
+            gameTimer = new Timer(1500);
+            gameTimer.Elapsed += delegate { SpawnMeteorWall(); };
+            gameTimer.Enabled = true;
+            meteorVelocity = 250;
+            holeLength = 8;
             base.Initialize();
         }
 
-       
+      
+
         protected override void LoadContent()
         {           
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -66,6 +81,28 @@ namespace SpaceWars
             spaceship.Update(elapsed);
             background1.Update(elapsed);
             background2.Update(elapsed);
+            foreach (var wall in meteors)
+            {
+                foreach (var meteor in wall)
+                {
+                    meteor.Update(elapsed);
+                }
+            }
+        }
+
+        private void SpawnMeteorWall()
+        {
+            List<Meteor> currentWall = new List<Meteor>();
+            int holePosition = rng.Next(0,25 - holeLength);
+            for (int i = 0; i < 25; i++)
+            {
+                if(i<=holePosition || i>= holePosition+holeLength)
+                {
+                    currentWall.Add(new Meteor(new Vector2(GAME_WIDTH, i * 28 + 10), Content.Load<Texture2D>("meteor"), meteorVelocity));
+                }
+                }
+            meteors.Add(currentWall);
+
         }
 
         private void KeyHandler()
@@ -73,11 +110,15 @@ namespace SpaceWars
             if (Keyboard.GetState().IsKeyDown(Keys.Down))
             {
                 spaceship.Velocity.Y = 500;
+                background1.Velocity.Y = -20;
+                background2.Velocity.Y = -20;
             }
 
             if(Keyboard.GetState().IsKeyDown(Keys.Up))
             {
                 spaceship.Velocity.Y = -500;
+                background1.Velocity.Y = 20;
+                background2.Velocity.Y = 20;
             }
         }
         
@@ -89,7 +130,16 @@ namespace SpaceWars
             background1.Draw(spriteBatch);
             background2.Draw(spriteBatch);
             spaceship.Draw(spriteBatch);
+            foreach (var wall in meteors)
+            {
+                foreach (var meteor in wall)
+                {
+                    meteor.Draw(spriteBatch);
+                }
+            }
             spriteBatch.End();
+
+            base.Draw(gameTime);
         }
     }
 }

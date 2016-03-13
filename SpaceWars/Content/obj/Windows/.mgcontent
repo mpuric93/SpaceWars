@@ -4,8 +4,9 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Mihailo/Documents/SpaceWars/SpaceWars/Content/ship.png</File>
     <File>C:/Users/Mihailo/Documents/SpaceWars/SpaceWars/Content/space.jpg</File>
     <File>C:/Users/Mihailo/Documents/SpaceWars/SpaceWars/Content/spaceRev.jpg</File>
+    <File>C:/Users/Mihailo/Documents/SpaceWars/SpaceWars/Content/ship.png</File>
+    <File>C:/Users/Mihailo/Documents/SpaceWars/SpaceWars/Content/meteor.png</File>
   </SourceFiles>
 </SourceFileCollection>
